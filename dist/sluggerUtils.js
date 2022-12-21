@@ -91,7 +91,7 @@ function getSluggerPlugins(schema) {
 exports.getSluggerPlugins = getSluggerPlugins;
 function isMongoError(e) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    return typeof e.name === 'string' && ['MongoError', 'BulkWriteError'].includes(e.name);
+    return typeof e.name === 'string' && ['MongoError', 'MongoServerError', 'BulkWriteError'].includes(e.name);
 }
 async function checkStorageEngine(db) {
     checkStorageEngineStatus(await db.admin().serverStatus());

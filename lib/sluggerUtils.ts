@@ -83,7 +83,7 @@ export function getSluggerPlugins(schema: Schema): any[] {
 
 function isMongoError(e: any): e is MongoError {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-  return typeof e.name === 'string' && ['MongoError', 'BulkWriteError'].includes(e.name);
+  return typeof e.name === 'string' && ['MongoError', 'MongoServerError', 'BulkWriteError'].includes(e.name);
 }
 
 export async function checkStorageEngine(db: mongodb.Db): Promise<void> {
