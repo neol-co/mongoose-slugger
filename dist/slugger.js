@@ -145,7 +145,7 @@ function wrap(model) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     model.prototype[utils.delegatedSaveFunction] = model.prototype.save;
     // only check the storage engine *once* on first call
-    let hasCheckedStorageEngine = false;
+    const hasCheckedStorageEngine = true;
     // @ts-expect-error ignore “TS7030: Not all code paths return a value.”
     // this is fine, as we’re following Mongoose’s API here
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -156,10 +156,10 @@ function wrap(model) {
             saveOptions = undefined;
         }
         let promise = Promise.resolve();
-        if (!hasCheckedStorageEngine) {
-            promise = promise.then(() => utils.checkStorageEngine(model.db.db));
-            hasCheckedStorageEngine = true;
-        }
+        // if (!hasCheckedStorageEngine) {
+        //   promise = promise.then(() => utils.checkStorageEngine(model.db.db));
+        //   hasCheckedStorageEngine = true;
+        // }
         promise = promise.then(() => utils.saveSlugWithRetries(this, sluggerOptions, saveOptions));
         if (!fn) {
             return promise;

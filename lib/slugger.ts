@@ -201,7 +201,7 @@ export function wrap<M extends Model<any>>(model: M): M {
   model.prototype[utils.delegatedSaveFunction] = model.prototype.save;
 
   // only check the storage engine *once* on first call
-  let hasCheckedStorageEngine = true;
+  const hasCheckedStorageEngine = true;
 
   // @ts-expect-error ignore “TS7030: Not all code paths return a value.”
   // this is fine, as we’re following Mongoose’s API here
@@ -215,10 +215,10 @@ export function wrap<M extends Model<any>>(model: M): M {
 
     let promise: Promise<any> = Promise.resolve();
 
-    if (!hasCheckedStorageEngine) {
-      promise = promise.then(() => utils.checkStorageEngine(model.db.db));
-      hasCheckedStorageEngine = true;
-    }
+    // if (!hasCheckedStorageEngine) {
+    //   promise = promise.then(() => utils.checkStorageEngine(model.db.db));
+    //   hasCheckedStorageEngine = true;
+    // }
 
     promise = promise.then(() => utils.saveSlugWithRetries(this, sluggerOptions, saveOptions));
 
