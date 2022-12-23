@@ -86,9 +86,9 @@ function isMongoError(e: any): e is MongoError {
   return typeof e.name === 'string' && ['MongoError', 'MongoServerError', 'BulkWriteError'].includes(e.name);
 }
 
-export async function checkStorageEngine(db: mongodb.Db): Promise<void> {
-  checkStorageEngineStatus(await db.admin().serverStatus());
-}
+// export async function checkStorageEngine(db: mongodb.Db): Promise<void> {
+//   checkStorageEngineStatus(await db.admin().serverStatus());
+// }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function checkStorageEngineStatus(status: any): void {
